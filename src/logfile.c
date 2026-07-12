@@ -45,7 +45,7 @@ int log_create_logfile(urlinfo * u)
     /*
      * Compute the name of the logfile 
      */
-    sprintf(buffer, "%s%s.log", u->file, DEFAULT_FILE_EXT);
+    snprintf(buffer, sizeof(buffer), "%s%s.log", u->file, DEFAULT_FILE_EXT);
     if (!(fp = fopen(buffer, "wb")))
     {
 
@@ -79,7 +79,7 @@ int log_logfile_exists(urlinfo * u)
     /*
      * Compute the name of the logfile 
      */
-    sprintf(buffer, "%s%s.log", u->file, DEFAULT_FILE_EXT);
+    snprintf(buffer, sizeof(buffer), "%s%s.log", u->file, DEFAULT_FILE_EXT);
 
     ret = stat(buffer, &st_buf);
     if (ret == -1)
@@ -98,7 +98,7 @@ int log_delete_logfile(urlinfo * u)
     char buffer[MAXPATHLEN];
     int ret;
 
-    sprintf(buffer, "%s%s.log", u->file, DEFAULT_FILE_EXT);
+    snprintf(buffer, sizeof(buffer), "%s%s.log", u->file, DEFAULT_FILE_EXT);
     ret = unlink(buffer);
     if (ret == -1)
     {
@@ -123,7 +123,7 @@ int log_read_logfile(urlinfo * u, logfile * lf)
     /*
      * Compute the name of the logfile 
      */
-    sprintf(buffer, "%s%s.log", u->file, DEFAULT_FILE_EXT);
+    snprintf(buffer, sizeof(buffer), "%s%s.log", u->file, DEFAULT_FILE_EXT);
 
     if (!(fp = fopen(buffer, "rb")))
     {

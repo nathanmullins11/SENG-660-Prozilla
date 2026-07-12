@@ -366,7 +366,7 @@ uerr_t get_http_info(urlinfo * u, http_stat_t * hs)
    if(u->referer)
       {
 	referer= (char *) alloca(13+strlen(u->referer));
-	sprintf(referer, "Referer: %s\r\n", u->referer);
+	snprintf(referer, 13+strlen(u->referer), "Referer: %s\r\n", u->referer);
       }
 
 
@@ -375,7 +375,7 @@ uerr_t get_http_info(urlinfo * u, http_stat_t * hs)
    with HEAD */
 
 
-    sprintf(buffer,
+    snprintf(buffer, sizeof(buffer),
 	    "HEAD %s HTTP/1.0\r\nUser-Agent: %s%s\r\nHost: %s\r\nAccept: */*\r\n%s%s\r\n",
 	    u->path, PACKAGE_NAME, VERSION, u->host, 
 	    referer ? referer : "",
@@ -573,7 +573,7 @@ char *get_basic_auth_str(char *user, char *passwd)
     char auth_header[] = "Authorization";
 
     p1 = (char *) kmalloc(sizeof(char) * len + 1);
-    sprintf(p1, "%s:%s", user, passwd);
+    snprintf(p1, sizeof(char) * len + 1, "%s:%s", user, passwd);
     p2 = (char *) kmalloc(sizeof(char) * b64len + 1);
 
     /*Encode username:passwd to base 64 */
@@ -581,7 +581,7 @@ char *get_basic_auth_str(char *user, char *passwd)
     ret =
 	(char *) kmalloc((sizeof(char) * strlen(auth_header)) + b64len +
 			 11);
-    sprintf(ret, "%s: Basic %s\r\n", auth_header, p2);
+    snprintf(ret, (sizeof(char) * strlen(auth_header)) + b64len + 11, "%s: Basic %s\r\n", auth_header, p2);
     free(p1);
     free(p2);
 

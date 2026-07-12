@@ -416,7 +416,7 @@ char *prozrc_file_name(void)
     if (home)
     {
 	file = (char *) kmalloc(strlen(home) + 1 + strlen(".prozrc") + 1);
-	sprintf(file, "%s/.prozrc", home);
+	snprintf(file, strlen(home) + 1 + strlen(".prozrc") + 1, "%s/.prozrc", home);
     }
 
     free(home);

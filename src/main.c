@@ -266,7 +266,7 @@ void ftp_allocate_connections(urlinfo * u, long file_length,
     {
 	memset(&connections[i], 0, sizeof(connection_data));
 	memcpy(&(connections[i].u), u, sizeof(urlinfo));
-	sprintf(buffer, "%s%s%d", u->file, DEFAULT_FILE_EXT, i);
+	snprintf(buffer, sizeof(buffer), "%s%s%d", u->file, DEFAULT_FILE_EXT, i);
 	connections[i].localfile = kstrdup(buffer);
 	connections[i].file_mode = kstrdup(file_io_mode);
 	connections[i].retry = TRUE;
@@ -341,7 +341,7 @@ void http_allocate_connections(urlinfo * u, long file_length,
 	memset(&connections[i], 0, sizeof(connection_data));
 	memcpy(&(connections[i].u), u, sizeof(urlinfo));
 
-	sprintf(buffer, "%s%s%d", u->file, DEFAULT_FILE_EXT, i);
+	snprintf(buffer, sizeof(buffer), "%s%s%d", u->file, DEFAULT_FILE_EXT, i);
 	connections[i].localfile = kstrdup(buffer);
 	connections[i].file_mode = kstrdup(file_io_mode);
 	connections[i].retry = TRUE;
@@ -919,7 +919,7 @@ void message(const char *args, ...)
     char p[MAX_MSG_SIZE];
     va_list vp;
     va_start(vp, args);
-    vsprintf(p, args, vp);
+    vsnprintf(p, args, vp);
     va_end(vp);
 
     switch (rt.display_mode)
@@ -990,7 +990,7 @@ void delete_file_portions(urlinfo * u)
 	 *  calculate the name of the download
 	 *  file fragment from the target file
 	 */
-	sprintf(buffer, "%s%s%d", u->file, DEFAULT_FILE_EXT, i);
+	snprintf(buffer, sizeof(buffer), "%s%s%d", u->file, DEFAULT_FILE_EXT, i);
 	ret = unlink(buffer);
 	/*
 	 *  did we encounter a error? 
@@ -1079,7 +1079,7 @@ void do_logfile(urlinfo * u)
 	     *  calculate the name of the download
 	     *  file fragment from the target file
 	     */
-	    sprintf(buffer, "%s%s%d", u->file, DEFAULT_FILE_EXT, i);
+	    snprintf(buffer, sizeof(buffer), "%s%s%d", u->file, DEFAULT_FILE_EXT, i);
 	    ret = stat(buffer, &st_buf);
 	    /*
 	     *  did we encounter a error? 
@@ -1155,7 +1155,7 @@ int die(const char *args, ...)
     char p[MAX_MSG_SIZE];
     va_list vp;
     va_start(vp, args);
-    vsprintf(p, args, vp);
+    vsnprintf(p, args, vp);
     va_end(vp);
 
     /* indicate that we are out of the display loop */
@@ -1216,7 +1216,7 @@ void quit(const char *args, ...)
     char p[MAX_MSG_SIZE];
     va_list vp;
     va_start(vp, args);
-    vsprintf(p, args, vp);
+    vsnprintf(p, args, vp);
     va_end(vp);
 
     endwin();
@@ -1524,7 +1524,7 @@ int main(int argc, char **argv)
 	if (home != NULL)
 	{
 	    char *netrc_file = malloc(strlen(home) + strlen(".netrc") + 2);
-	    sprintf(netrc_file, "%s/%s", home, ".netrc");
+	    snprintf(netrc_file, strlen(home) + strlen(".netrc") + 2, "%s/%s", home, ".netrc");
 	    rt.netrc_list = parse_netrc(netrc_file);
 	}
     }

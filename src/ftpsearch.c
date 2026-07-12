@@ -119,7 +119,7 @@ char *prepare_lycos_url(urlinfo * url_data, char * ftps_loc)
     lycos_url_buf =
 	(char *) kmalloc(lycos_url_len + strlen(url_data->file) + 300);
 
-    sprintf(lycos_url_buf,
+    snprintf(lycos_url_buf, lycos_url_len + strlen(url_data->file) + 300,
 	    "%s?form=advanced&query=%s&doit=Search&type=Exact+search&hits=%d&matches=&hitsprmatch=&limdom=&limpath=&limsize1=%ld&limsize2=%ld&f1=Host&f2=Path&f3=Size&f4=-&f5=-&f6=-&header=none&sort=none&trlen=20",
 	    ftps_loc, url_data->file, rt.ftps_mirror_req_n,
 	    url_data->file_size, url_data->file_size);
@@ -140,9 +140,9 @@ char *prepare_lycos_url(urlinfo * url_data, char * ftps_loc)
        p=strdup(url_data->dir);
        p1=strtok(p,"/");
 
-       sprintf(lycos_url_buf,"localhost/search3.html"); 
+       snprintf(lycos_url_buf,"localhost/search3.html"); 
      */
-    /*     sprintf(lycos_url_buf,"localhost/search3.html"); */
+    /*     snprintf(lycos_url_buf,"localhost/search3.html"); */
 
     debug_prz("ftpsearch url= %s\n", lycos_url_buf);
     return lycos_url_buf;
@@ -299,7 +299,7 @@ uerr_t parse_html_mirror_list(urlinfo * url_data,char *p,struct ftp_mirror ** pm
 	    (char *) kmalloc(strlen(ftp_mirrors[k].server_name) +
 			     strlen(ftp_mirrors[k].path) +
 			     strlen(ftp_mirrors[k].file_name) + 13);
-	sprintf(ftp_mirrors[k].full_name, "%s%s:21/%s%s%s", "ftp://",
+	snprintf(ftp_mirrors[k].full_name, strlen(ftp_mirrors[k].server_name) + strlen(ftp_mirrors[k].path) + strlen(ftp_mirrors[k].file_name) + 13, "%s%s:21/%s%s%s", "ftp://",
 		ftp_mirrors[k].server_name, ftp_mirrors[k].path, "/",
 		ftp_mirrors[k].file_name);
 
@@ -801,7 +801,7 @@ uerr_t get_mirror_info(urlinfo * u, http_stat_t * hs, char **ret_buf)
        with HEAD */
 
 
-    sprintf(buffer,
+    snprintf(buffer, sizeof(buffer),
 	    "GET %s HTTP/1.0\r\nUser-Agent: %s%s\r\nHost: %s\r\nAccept: */*\r\n%s\r\n",
 	    u->path, PACKAGE_NAME, VERSION, u->host,
 	    wwwauth ? wwwauth : "");

@@ -263,7 +263,7 @@ uerr_t ftp_get_file_chunk(connection_data * connection)
 	    char dhost[256];
 	    unsigned short dport;
 
-	    sprintf(dhost, "%d.%d.%d.%d",
+	    snprintf(dhost, sizeof(dhost), "%d.%d.%d.%d",
 		    pasv_addr[0], pasv_addr[1], pasv_addr[2],
 		    pasv_addr[3]);
 	    dport = (pasv_addr[4] << 8) + pasv_addr[5];
@@ -564,7 +564,7 @@ uerr_t ftp_get_file_to_end(connection_data * connection)
 	{
 	    char dhost[256];
 	    unsigned short dport;
-	    sprintf(dhost, "%d.%d.%d.%d",
+	    snprintf(dhost, sizeof(dhost), "%d.%d.%d.%d",
 		    pasv_addr[0], pasv_addr[1], pasv_addr[2],
 		    pasv_addr[3]);
 	    dport = (pasv_addr[4] << 8) + pasv_addr[5];

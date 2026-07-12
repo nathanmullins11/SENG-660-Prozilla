@@ -189,7 +189,7 @@ uerr_t ftp_ascii(int sock)
     char szBuffer[FTP_BUFFER_SIZE];
     uerr_t err;
 
-    sprintf(szBuffer, "TYPE A\r\n");
+    snprintf(szBuffer, sizeof(szBuffer), "TYPE A\r\n");
 
     err = ftp_send_msg(sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
@@ -217,7 +217,7 @@ uerr_t ftp_binary(int sock)
     char szBuffer[FTP_BUFFER_SIZE];
     uerr_t err;
 
-    sprintf(szBuffer, "TYPE I\r\n");
+    snprintf(szBuffer, sizeof(szBuffer), "TYPE I\r\n");
     err = ftp_send_msg(sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
     {
@@ -273,7 +273,7 @@ uerr_t ftp_list(int sock, char *file)
     char szBuffer[FTP_BUFFER_SIZE];
     uerr_t err;
 
-    sprintf(szBuffer, "LIST %s\r\n", file);
+    snprintf(szBuffer, sizeof(szBuffer), "LIST %s\r\n", file);
     err = ftp_send_msg(sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
     {
@@ -304,7 +304,7 @@ uerr_t ftp_retr(int sock, char *file)
     char szBuffer[FTP_BUFFER_SIZE];
     uerr_t err;
 
-    sprintf(szBuffer, "RETR %s\r\n", file);
+    snprintf(szBuffer, sizeof(szBuffer), "RETR %s\r\n", file);
     err = ftp_send_msg(sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
     {
@@ -342,7 +342,7 @@ uerr_t ftp_pasv(int sock, unsigned char *addr)
     unsigned char *p;
     int i;
 
-    sprintf(szBuffer, "PASV\r\n");
+    snprintf(szBuffer, sizeof(szBuffer), "PASV\r\n");
     err = ftp_send_msg(sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
     {
@@ -389,7 +389,7 @@ uerr_t ftp_rest(int sock, long bytes)
     char szBuffer[FTP_BUFFER_SIZE];
     uerr_t err;
 
-    sprintf(szBuffer, "REST %ld\r\n", bytes);
+    snprintf(szBuffer, sizeof(szBuffer), "REST %ld\r\n", bytes);
     err = ftp_send_msg(sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
     {
@@ -417,7 +417,7 @@ uerr_t ftp_cwd(int sock, char *dir)
     char szBuffer[FTP_BUFFER_SIZE];
     uerr_t err;
 
-    sprintf(szBuffer, "CWD %s\r\n", dir);
+    snprintf(szBuffer, sizeof(szBuffer), "CWD %s\r\n", dir);
     err = ftp_send_msg(sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
     {
@@ -460,7 +460,7 @@ uerr_t ftp_pwd(int sock, char *dir)
     uerr_t err;
     char *r, *l;
 
-    sprintf(szBuffer, "PWD");
+    snprintf(szBuffer, sizeof(szBuffer), "PWD");
     err = ftp_send_msg(sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
     {
@@ -606,7 +606,7 @@ uerr_t ftp_get_listen_socket(int control_sock, int *listen_sock)
 
 #define  UC(b)  (((int)b)&0xff)
 
-    sprintf(command, "PORT %d,%d,%d,%d,%d,%d\r\n",
+    snprintf(command, sizeof(command), "PORT %d,%d,%d,%d,%d,%d\r\n",
 	    UC(ipaddr[0]), UC(ipaddr[1]), UC(ipaddr[2]), UC(ipaddr[3]),
 	    UC(port[0]), UC(port[1]));
 
@@ -630,7 +630,7 @@ uerr_t ftp_login(int control_sock, const char *username,
 {
     uerr_t err;
     char szBuffer[FTP_BUFFER_SIZE];
-    sprintf(szBuffer, "USER %s\r\n", username);
+    snprintf(szBuffer, sizeof(szBuffer), "USER %s\r\n", username);
 
     err = ftp_send_msg(control_sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
@@ -663,7 +663,7 @@ uerr_t ftp_login(int control_sock, const char *username,
      * send password 
      */
 
-    sprintf(szBuffer, "PASS %s\r\n", passwd);
+    snprintf(szBuffer, sizeof(szBuffer), "PASS %s\r\n", passwd);
     err = ftp_send_msg(control_sock, szBuffer, strlen(szBuffer));
 
     if (err != FTPOK)
@@ -744,7 +744,7 @@ uerr_t ftp_get_file_info(int control_sock, char *fname, ftp_stat_t * fs)
      * SIZE command and if the server doesn't support it * we fall back on
      * the LIST command..... 
      */
-    sprintf(szBuffer, "SIZE %s\r\n", fname);
+    snprintf(szBuffer, sizeof(szBuffer), "SIZE %s\r\n", fname);
     err = ftp_send_msg(control_sock, szBuffer, strlen(szBuffer));
     if (err != FTPOK)
     {
@@ -804,7 +804,7 @@ uerr_t ftp_get_file_info(int control_sock, char *fname, ftp_stat_t * fs)
 	{
 	    char dhost[256];
 	    unsigned short dport;
-	    sprintf(dhost, "%d.%d.%d.%d",
+	    snprintf(dhost, sizeof(dhost), "%d.%d.%d.%d",
 		    pasv_addr[0], pasv_addr[1], pasv_addr[2],
 		    pasv_addr[3]);
 	    dport = (pasv_addr[4] << 8) + pasv_addr[5];

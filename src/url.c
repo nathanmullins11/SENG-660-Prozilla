@@ -616,7 +616,7 @@ char *str_url(const urlinfo * u, int hide)
   if (u->proto == URLFTP && *dir == '/')
   {
     char *tmp = (char *) kmalloc(strlen(dir) + 3);
-    /*sprintf (tmp, "%%2F%s", dir + 1); */
+    /*snprintf (tmp, "%%2F%s", dir + 1); */
     tmp[0] = '%';
     tmp[1] = '2';
     tmp[2] = 'F';
@@ -632,7 +632,7 @@ char *str_url(const urlinfo * u, int hide)
   ld = strlen(dir);
   lf = strlen(file);
   res = (char *) kmalloc(ln + lu + lp + lh + ld + lf + 20);	/* safe sex */
-  /* sprintf (res, "%s%s%s%s%s%s:%d/%s%s%s", proto_name,
+  /* snprintf (res, "%s%s%s%s%s%s:%d/%s%s%s", proto_name,
      (user ? user : ""), (passwd ? ":" : ""),
      (passwd ? passwd : ""), (user ? "@" : ""),
      host, u->port, dir, *dir ? "/" : "", file); */
@@ -657,7 +657,7 @@ char *str_url(const urlinfo * u, int hide)
   {
     res[l++] = ':';
 
-    sprintf(res + l, "%ld", (long) u->port);
+    snprintf(res + l, sizeof(res) - l, "%ld", (long) u->port);
 
     l += numdigit(u->port);
   }
@@ -806,7 +806,7 @@ uerr_t parseurl(const char *url, urlinfo * u, int strict)
     u->dir[l - 1] = '\0';
   /* Re-create the path: */
   abs_ftp = (u->proto == URLFTP && *u->dir == '/');
-  /*  sprintf (u->path, "%s%s%s%s", abs_ftp ? "%2F": "/",
+  /*  snprintf (u->path, "%s%s%s%s", abs_ftp ? "%2F": "/",
      abs_ftp ? (u->dir + 1) : u->dir, *u->dir ? "/" : "", u->file); */
   strcpy(u->path, abs_ftp ? "%2F" : "/");
   strcat(u->path, abs_ftp ? (u->dir + 1) : u->dir);

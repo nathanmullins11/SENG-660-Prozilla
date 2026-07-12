@@ -342,7 +342,7 @@ char *get_prefixed_file(char *file)
 
 	prefixed_output_file = kmalloc(PATH_MAX);
 	   
-	snprintf(prefixed_output_file, PATH_MAX,"%s/%s", rt.output_dirprefix, file);
+	snprintf(prefixed_output_file, PATH_MAX, "%s/%s", rt.output_dirprefix, file);
 	debug_prz("prefixed output_file = %s\n", prefixed_output_file);
 	return prefixed_output_file;
     }

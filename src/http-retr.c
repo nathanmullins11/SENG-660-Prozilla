@@ -183,13 +183,13 @@ uerr_t http_get_file_chunk(connection_data * connection)
     if(connection->u.referer)
       {
 	referer= (char *) alloca(13+strlen(connection->u.referer));
-	sprintf(referer, "Referer: %s\r\n", connection->u.referer);
+	snprintf(referer, 13+strlen(connection->u.referer), "Referer: %s\r\n", connection->u.referer);
       }
 
     /*
      * get the headers by sending GET 
      */
-    sprintf(buffer,
+    snprintf(buffer, sizeof(buffer),
 	    "GET %s HTTP/1.0\r\nUser-Agent: %s%s\r\nHost: %s\r\nAccept: */*\r\nRange: bytes=%ld-%ld\r\n%s%s\r\n",
 	    connection->u.path, PACKAGE_NAME, VERSION,
 	    connection->u.host,
@@ -345,7 +345,7 @@ uerr_t http_get_complete_file(connection_data * connection)
    if(connection->u.referer)
       {
 	referer= (char *) alloca(13+strlen(connection->u.referer));
-	sprintf(referer, "Referer: %s\r\n", connection->u.referer);
+	snprintf(referer, 13+strlen(connection->u.referer), "Referer: %s\r\n", connection->u.referer);
       }
 
 
@@ -357,7 +357,7 @@ uerr_t http_get_complete_file(connection_data * connection)
      * we will use the GET command 
      */
 
-    sprintf(buffer,
+    snprintf(buffer, sizeof(buffer),
 	    "GET %s HTTP/1.0\r\nUser-Agent: %s%s\r\nHost: %s\r\nAccept: */*\r\n%s%s\r\n",
 	    connection->u.path, PACKAGE_NAME, VERSION,
 	    connection->u.host, referer ? referer : "",wwwauth ? wwwauth : "");
