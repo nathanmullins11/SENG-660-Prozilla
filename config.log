@@ -1,0 +1,46 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:557: checking for a BSD compatible install
+configure:610: checking whether build environment is sane
+configure:667: checking whether make sets ${MAKE}
+configure:713: checking for working aclocal
+configure:726: checking for working autoconf
+configure:739: checking for working automake
+configure:752: checking for working autoheader
+configure:765: checking for working makeinfo
+configure:784: checking for gcc
+configure:897: checking whether the C compiler (gcc  ) works
+configure:913: gcc -o conftest    conftest.c  1>&5
+configure:910:1: warning: return type defaults to 'int' [-Wimplicit-int]
+  910 | main(){return(0);}
+      | ^~~~
+configure:939: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:944: checking whether we are using GNU C
+configure:972: checking whether gcc accepts -g
+configure:1015: checking for a BSD compatible install
+configure:1069: checking for pthread_create in -lpthread
+configure:1118: checking how to run the C preprocessor
+configure:1198: checking for ANSI C header files
+configure:1305: checking for ncurses.h
+configure:1305: checking for curses.h
+configure:1305: checking for strings.h
+configure:1305: checking for malloc.h
+configure:1305: checking for sys/time.h
+configure:1305: checking for unistd.h
+configure:1305: checking for sys/types.h
+configure:1305: checking for sys/socket.h
+configure:1342: checking for initscr in -lncurses
+configure:1454: checking for working const
+configure:1529: checking for size_t
+configure:1562: checking whether time.h and sys/time.h may both be included
+configure:1597: checking for socklen_t
+configure:1634: checking whether setvbuf arguments are reversed
+configure:1680: checking for vprintf
+configure:1787: checking for gettimeofday
+configure:1787: checking for select
+configure:1787: checking for socket
+configure:1787: checking for strdup
+configure:1787: checking for strerror
+configure:1787: checking for strstr
+configure:1841: checking for which type of gethostbyname_r
