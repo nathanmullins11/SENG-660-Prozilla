@@ -919,7 +919,7 @@ void message(const char *args, ...)
     char p[MAX_MSG_SIZE];
     va_list vp;
     va_start(vp, args);
-    vsnprintf(p, args, vp);
+    vsprintf(p, args, vp);
     va_end(vp);
 
     switch (rt.display_mode)
@@ -1155,7 +1155,7 @@ int die(const char *args, ...)
     char p[MAX_MSG_SIZE];
     va_list vp;
     va_start(vp, args);
-    vsnprintf(p, args, vp);
+    vsprintf(p, args, vp);
     va_end(vp);
 
     /* indicate that we are out of the display loop */
@@ -1216,7 +1216,7 @@ void quit(const char *args, ...)
     char p[MAX_MSG_SIZE];
     va_list vp;
     va_start(vp, args);
-    vsnprintf(p, args, vp);
+    vsprintf(p, args, vp);
     va_end(vp);
 
     endwin();

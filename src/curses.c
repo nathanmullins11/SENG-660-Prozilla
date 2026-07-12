@@ -523,7 +523,7 @@ void curses_message(const char *args, ...)
      */
     pthread_mutex_lock(&curses_msg_mutex);
     va_start(vp, args);
-    vsnprintf(p, args, vp);
+    vsprintf(p, args, vp);
     va_end(vp);
 
     if (rt.in_curses_display_loop == TRUE)
@@ -572,7 +572,7 @@ int curses_query_user_input(const char *args, ...)
     int i;
 
     va_start(vp, args);
-    vsnprintf(p, args, vp);
+    vsprintf(p, args, vp);
     va_end(vp);
     getyx(stdscr, y, x);
     kwattr_get(stdscr, &attrs, &i, NULL);

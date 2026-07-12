@@ -72,7 +72,7 @@ void debug_prz(const char *args, ...)
     {
 	va_list vp;
 	va_start(vp, args);
-	vsnprintf(p, args, vp);
+	vsprintf(p, args, vp);
 	va_end(vp);
 
 	if (!(fp = fopen("debug.log", "at")))
